@@ -33,6 +33,17 @@ module Gobgems
   Green = Value.new('Verde')
   Black = Value.new('Negro')
 
+  def pop(color)
+    Value.new("Sacar(#{color.compile})")
+  end
+
+  def push(color)
+    Value.new("Poner(#{color.compile})")
+  end
+
+  def move(direction)
+    Value.new("Mover(#{direction.compile})")
+  end
 end
 
 include Gobgems
@@ -57,5 +68,16 @@ describe "valores" do
     it { expect(Red.compile).to eq 'Rojo' }
     it { expect(Black.compile).to eq 'Negro' }
     it { expect(Green.compile).to eq 'Verde' }
+  end
+
+  describe "acciones" do
+    it { expect((push Red).compile).to eq 'Poner(Rojo)' }
+    it { expect((push Green).compile).to eq 'Poner(Verde)' }
+
+    it { expect((move West).compile).to eq 'Mover(Oeste)' }
+    it { expect((move East).compile).to eq 'Mover(Este)' }
+
+    it { expect((pop Red).compile).to eq 'Sacar(Rojo)' }
+    it { expect((pop Green).compile).to eq 'Sacar(Verde)' }
   end
 end
