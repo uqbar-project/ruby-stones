@@ -22,10 +22,17 @@ module Gobgems
       @compiled
     end
   end
+
   East = Value.new('Este')
   North = Value.new('Norte')
   South = Value.new('Sur')
   West = Value.new('Oeste')
+
+  Red = Value.new('Rojo')
+  Blue = Value.new('Azul')
+  Green = Value.new('Verde')
+  Black = Value.new('Negro')
+
 end
 
 include Gobgems
@@ -44,5 +51,11 @@ describe "valores" do
     it { expect(North.compile).to eq 'Norte' }
     it { expect(South.compile).to eq 'Sur' }
     it { expect(West.compile).to eq 'Oeste' }
+  end
+  describe "colores" do
+    it { expect(Blue.compile).to eq 'Azul' }
+    it { expect(Red.compile).to eq 'Rojo' }
+    it { expect(Black.compile).to eq 'Negro' }
+    it { expect(Green.compile).to eq 'Verde' }
   end
 end
