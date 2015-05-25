@@ -14,7 +14,7 @@ module Gobgems
       'false'
     end
   end
-  class Value
+  class Expression
     def initialize(compiled)
       @compiled = compiled
     end
@@ -23,26 +23,26 @@ module Gobgems
     end
   end
 
-  East = Value.new('Este')
-  North = Value.new('Norte')
-  South = Value.new('Sur')
-  West = Value.new('Oeste')
+  East = Expression.new('Este')
+  North = Expression.new('Norte')
+  South = Expression.new('Sur')
+  West = Expression.new('Oeste')
 
-  Red = Value.new('Rojo')
-  Blue = Value.new('Azul')
-  Green = Value.new('Verde')
-  Black = Value.new('Negro')
+  Red = Expression.new('Rojo')
+  Blue = Expression.new('Azul')
+  Green = Expression.new('Verde')
+  Black = Expression.new('Negro')
 
   def pop(color)
-    Value.new("Sacar(#{color.compile})")
+    Expression.new("Sacar(#{color.compile})")
   end
 
   def push(color)
-    Value.new("Poner(#{color.compile})")
+    Expression.new("Poner(#{color.compile})")
   end
 
   def move(direction)
-    Value.new("Mover(#{direction.compile})")
+    Expression.new("Mover(#{direction.compile})")
   end
 end
 
