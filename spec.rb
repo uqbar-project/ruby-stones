@@ -23,15 +23,15 @@ module Gobgems
     end
   end
 
-  East = Expression.new('Este')
-  North = Expression.new('Norte')
-  South = Expression.new('Sur')
-  West = Expression.new('Oeste')
+  def east; Expression.new('Este'); end
+  def north; Expression.new('Norte'); end
+  def south; Expression.new('Sur'); end
+  def west; Expression.new('Oeste'); end
 
-  Red = Expression.new('Rojo')
-  Blue = Expression.new('Azul')
-  Green = Expression.new('Verde')
-  Black = Expression.new('Negro')
+  def red; Expression.new('Rojo'); end
+  def blue; Expression.new('Azul'); end
+  def green; Expression.new('Verde'); end
+  def black; Expression.new('Negro'); end
 
   def pop(color)
     Expression.new("Sacar(#{color.compile})")
@@ -57,27 +57,28 @@ describe "valores" do
     it { expect(true.compile).to eq 'true' }
     it { expect(false.compile).to eq 'false' }
   end
-  describe "direcciones" do
-    it { expect(East.compile).to eq 'Este' }
-    it { expect(North.compile).to eq 'Norte' }
-    it { expect(South.compile).to eq 'Sur' }
-    it { expect(West.compile).to eq 'Oeste' }
+  describe "direccion
+    def es east" do
+    it { expect(east.compile).to eq 'Este' }
+    it { expect(north.compile).to eq 'Norte' }
+    it { expect(south.compile).to eq 'Sur' }
+    it { expect(west.compile).to eq 'Oeste' }
   end
   describe "colores" do
-    it { expect(Blue.compile).to eq 'Azul' }
-    it { expect(Red.compile).to eq 'Rojo' }
-    it { expect(Black.compile).to eq 'Negro' }
-    it { expect(Green.compile).to eq 'Verde' }
+    it { expect(blue.compile).to eq 'Azul' }
+    it { expect(red.compile).to eq 'Rojo' }
+    it { expect(black.compile).to eq 'Negro' }
+    it { expect(green.compile).to eq 'Verde' }
   end
 
   describe "acciones" do
-    it { expect((push Red).compile).to eq 'Poner(Rojo)' }
-    it { expect((push Green).compile).to eq 'Poner(Verde)' }
+    it { expect((push red).compile).to eq 'Poner(Rojo)' }
+    it { expect((push green).compile).to eq 'Poner(Verde)' }
 
-    it { expect((move West).compile).to eq 'Mover(Oeste)' }
-    it { expect((move East).compile).to eq 'Mover(Este)' }
+    it { expect((move west).compile).to eq 'Mover(Oeste)' }
+    it { expect((move east).compile).to eq 'Mover(Este)' }
 
-    it { expect((pop Red).compile).to eq 'Sacar(Rojo)' }
-    it { expect((pop Green).compile).to eq 'Sacar(Verde)' }
+    it { expect((pop red).compile).to eq 'Sacar(Rojo)' }
+    it { expect((pop green).compile).to eq 'Sacar(Verde)' }
   end
 end
