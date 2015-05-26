@@ -1,14 +1,32 @@
 module Gobgems
-  class Board
-    attr_reader :cells, :head_position
+  class OutOfBoardError < RuntimeError
+  end
 
-    def initialize(cells, position)
-      @cells = cells
+  module WithMovementOps
+    def can_move?(direction)
+      within_bounds? next_position(direction)
+    end
+
+    def move(direction)
+      __move_to__ next_position(direction)
+    end
+
+    def __move_to__(position)
+      raise OutOfBoardError unless within_bounds? position
       @head_position = position
     end
 
-    def push(color)
-      head_cell[color] += 1
+    private
+
+    def next_position(direction)
+      direction.call(*@head_position)
+    end
+
+  end
+
+  module WithColorOps
+    def push(color, amount=1)
+      head_cell[color] += amount
     end
 
     def pop(color)
@@ -23,18 +41,17 @@ module Gobgems
     def exist?(color)
       count(color) > 0
     end
+  end
 
-    def can_move?(direction)
-      new_head_position = direction.call(*@head_position)
-      (x, y) = size
+  class Board
+    include WithMovementOps
+    include WithColorOps
 
-      new_head_position[0] >= 0 && new_head_position[1] >= 0 &&
-          new_head_position[0] <= x && new_head_position[1] <= y
-    end
+    attr_reader :cells, :head_position
 
-    def move(direction)
-      raise 'Out of bouds' unless can_move? direction
-      @head_position = direction.call(*@head_position)
+    def initialize(cells, position)
+      @cells = cells
+      @head_position = position
     end
 
     def size
@@ -61,6 +78,12 @@ module Gobgems
 
     private
 
+    def within_bounds?(position)
+      (x, y) = size
+      position[0] >= 0 && position[1] >= 0 &&
+          position[0] <= x && position[1] <= y
+    end
+
     def head_cell
       cell_at(head_position)
     end
@@ -69,9 +92,9 @@ module Gobgems
       cells[position[0]][position[1]]
     end
 
-
     def self.empty_cell
       {red: 0, black: 0, green: 0, blue: 0}
     end
   end
 end
+

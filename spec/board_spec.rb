@@ -1,17 +1,15 @@
-require_relative '../lib/gobgems'
-require 'rspec'
+require_relative './spec_helper'
 
-include Gobgems
-
-describe 'enums' do
-  it { expect(Color.all).to eq [Color.red, Color.green, Color.black, Color.blue] }
-  it { expect(Direction.all).to eq [Direction.east, Direction.west, Direction.south, Direction.north] }
-end
-
-describe "board" do
+describe Board do
 
   it { expect(Board.empty(1, 1)).to eq Board.empty(1, 1) }
+  it { expect(Board.empty(1, 1)).to_not eq Board.empty(2, 2) }
+
   it { expect(Board.empty(1, 1)).to eq Board.from([[{}]]) }
+  it { expect(Board.from([[{red: 1}]])).to eq Board.from([[{red: 1}]]) }
+  it { expect(Board.from([[{red: 2}]])).to eq Board.from([[{red: 1}]]) }
+  it { expect(Board.from([[{red: 2}]])).to eq Board.from([[{green: 2}]]) }
+
   it { expect(Board.empty(2, 2)).to eq Board.from([[{}, {}], [{}, {}]]) }
 
   describe 'ops' do
@@ -116,7 +114,7 @@ describe "board" do
         board.move Direction.south
         board.move Direction.south
       end
-      it { expect { board.move Direction.south }.to raise_exception  }
+      it { expect { board.move Direction.south }.to raise_exception }
     end
 
     context 'move out of board' do
@@ -127,104 +125,3 @@ describe "board" do
 
 end
 
-
-describe "valores" do
-  context 'empty program' do
-    class SampleProgram1
-      include Gobgems::Program
-
-      def main
-      end
-    end
-    before do
-      @context = Gobgems::ExecutionContext.new
-      @context.board = Board.empty(2, 2)
-      @context.run SampleProgram1
-    end
-
-    it { expect(@context.board).to eq Board.empty(2, 2) }
-  end
-
-  context 'idempotent program' do
-    class SampleProgram2
-      include Gobgems::Program
-
-      def main
-        push red
-        pop red
-      end
-
-    end
-
-    before do
-      @context = ExecutionContext.new
-      @context.board = Board.empty(2, 2)
-      @context.run SampleProgram2
-    end
-
-    it { expect(@context.board).to eq Board.from([[{}, {}], [{}, {}]]) }
-  end
-
-  context 'movement program' do
-    class SampleProgram3
-      include Gobgems::Program
-
-      def main
-        move east
-      end
-    end
-    before do
-      @context = Gobgems::ExecutionContext.new
-      @context.board = Board.empty(2, 2)
-      @context.run SampleProgram3
-    end
-
-    it { expect(@context.board).to eq Board.empty(2, 2, [0, 1]) }
-  end
-
-  context 'simple program' do
-    class SampleProgram4
-      include Gobgems::Program
-
-      def main
-        push red
-        move east
-        push black
-        move west
-      end
-    end
-    before do
-      @context = Gobgems::ExecutionContext.new
-      @context.board = Board.empty(2, 2)
-      @context.run SampleProgram3
-    end
-
-    it { expect(@context.board).to eq Board.empty(2, 2, [0, 1]) }
-  end
-
-
-  context 'program with if' do
-    class SampleProgram5
-      include Gobgems::Program
-
-      def main
-        if can_move? north
-          move north
-          push red
-        end
-        push black
-        if count(black) >= 1
-          push red
-        end
-      end
-    end
-
-    before do
-      @context = Gobgems::ExecutionContext.new
-      @context.board = Board.empty(2, 2)
-      @context.run SampleProgram5
-    end
-
-    it { expect(@context.board).to eq Board.from([[{red: 1, black: 1}, {}], [{}, {}]], [0, 0]) }
-  end
-end
