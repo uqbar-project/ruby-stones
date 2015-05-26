@@ -1,7 +1,7 @@
-require_relative './gobgems'
+require_relative '../lib/gobgems'
 require 'rspec'
 
-include Gobstones
+include Gobgems
 
 describe 'enums' do
   it { expect(Color.all).to eq [Color.red, Color.green, Color.black, Color.blue] }
@@ -138,11 +138,11 @@ describe "valores" do
     end
     before do
       @context = Gobgems::ExecutionContext.new
-      @context.board = Gobstones::Board.empty(2, 2)
+      @context.board = Board.empty(2, 2)
       @context.run SampleProgram1
     end
 
-    it { expect(@context.board).to eq Gobstones::Board.empty(2, 2) }
+    it { expect(@context.board).to eq Board.empty(2, 2) }
   end
 
   context 'idempotent program' do
@@ -157,12 +157,12 @@ describe "valores" do
     end
 
     before do
-      @context = Gobgems::ExecutionContext.new
-      @context.board = Gobstones::Board.empty(2, 2)
+      @context = ExecutionContext.new
+      @context.board = Board.empty(2, 2)
       @context.run SampleProgram2
     end
 
-    it { expect(@context.board).to eq Gobstones::Board.from([[{}, {}], [{}, {}]]) }
+    it { expect(@context.board).to eq Board.from([[{}, {}], [{}, {}]]) }
   end
 
   context 'movement program' do
@@ -175,11 +175,11 @@ describe "valores" do
     end
     before do
       @context = Gobgems::ExecutionContext.new
-      @context.board = Gobstones::Board.empty(2, 2)
+      @context.board = Board.empty(2, 2)
       @context.run SampleProgram3
     end
 
-    it { expect(@context.board).to eq Gobstones::Board.empty(2, 2, [0, 1]) }
+    it { expect(@context.board).to eq Board.empty(2, 2, [0, 1]) }
   end
 
   context 'simple program' do
@@ -195,11 +195,11 @@ describe "valores" do
     end
     before do
       @context = Gobgems::ExecutionContext.new
-      @context.board = Gobstones::Board.empty(2, 2)
+      @context.board = Board.empty(2, 2)
       @context.run SampleProgram3
     end
 
-    it { expect(@context.board).to eq Gobstones::Board.empty(2, 2, [0, 1]) }
+    it { expect(@context.board).to eq Board.empty(2, 2, [0, 1]) }
   end
 
 
@@ -221,10 +221,10 @@ describe "valores" do
 
     before do
       @context = Gobgems::ExecutionContext.new
-      @context.board = Gobstones::Board.empty(2, 2)
+      @context.board = Board.empty(2, 2)
       @context.run SampleProgram5
     end
 
-    it { expect(@context.board).to eq Gobstones::Board.from([[{red: 1, black: 1}, {}], [{}, {}]], [0, 0]) }
+    it { expect(@context.board).to eq Board.from([[{red: 1, black: 1}, {}], [{}, {}]], [0, 0]) }
   end
 end
