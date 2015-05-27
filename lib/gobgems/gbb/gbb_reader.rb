@@ -1,4 +1,4 @@
-require_relative '../extensions/array.rb'
+require_relative '../../extensions/array.rb'
 
 
 class MatchData
@@ -8,7 +8,7 @@ class MatchData
 end
 
 module Gobgems
-  class GbbParser
+  class GbbReader
     COLORS = {'Azul' => :blue, 'Negro' => :black, 'Rojo' => :red, 'Verde' => :green}
 
     def from_string(gbb_string)
