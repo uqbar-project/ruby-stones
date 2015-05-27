@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Gobgems::VERSION
   spec.authors       = ['Federico Aloi', 'Franco Bulgarelli']
   spec.email         = ['federico.aloi@gmail.com', 'flbulgarelli@yahoo.com.ar']
-  spec.summary       = 'Minimal library that implements a Gobstones-like board'
+  spec.summary       = 'Pure ruby library that implements a Gobstones-like board and dsl'
   spec.description   = 'Write Gobstones program within Ruby'
   spec.homepage      = 'https://github.com/flbulgarelli/gobgems'
   spec.license       = 'MIT'
