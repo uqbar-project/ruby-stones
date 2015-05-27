@@ -11,6 +11,10 @@ module Gobgems
       __move_to__ next_position(direction)
     end
 
+    def move_to_edge(direction)
+      move(direction) while can_move?(direction)
+    end
+
     def __move_to__(position)
       raise OutOfBoardError unless within_bounds? position
       @head_position = position
@@ -90,7 +94,7 @@ module Gobgems
     def within_bounds?(position)
       (x, y) = size
       position[0] >= 0 && position[1] >= 0 &&
-          position[0] <= x && position[1] <= y
+          position[0] < x && position[1] < y
     end
 
     def head_cell

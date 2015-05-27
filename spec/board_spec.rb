@@ -76,6 +76,35 @@ describe Board do
       it { expect(board.can_move?(Direction.north)).to be false }
     end
 
+    context 'idempotent move_to_edge horizontal idempotent ops' do
+      before do
+        board.move_to_edge Direction.east
+        board.move_to_edge Direction.west
+      end
+      it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [0, 0]) }
+    end
+
+    context 'idempotent move_to_edge vertical idempotent ops' do
+      before do
+        board.move_to_edge Direction.south
+        board.move_to_edge Direction.north
+      end
+      it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [0, 0]) }
+    end
+
+    context 'idempotent move_to_edge mixed ops' do
+      before do
+        board.move_to_edge Direction.east
+      end
+      it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [0, 1]) }
+    end
+
+    context 'idempotent move_to_edge vertical ops' do
+      before do
+        board.move_to_edge Direction.south
+      end
+      it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [1, 0]) }
+    end
 
     context 'idempotent move horizontal ops' do
       before do
@@ -111,7 +140,6 @@ describe Board do
 
     context 'move without external bounds' do
       before do
-        board.move Direction.south
         board.move Direction.south
       end
       it { expect { board.move Direction.south }.to raise_exception }
