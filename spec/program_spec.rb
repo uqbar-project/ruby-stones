@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "valores" do
+describe Gobgems::Program do
   context 'empty program' do
     class SampleProgram1
       include Gobgems::Program
@@ -51,7 +51,7 @@ describe "valores" do
       @context.run SampleProgram3
     end
 
-    it { expect(@context.board).to eq Board.empty(2, 2, [0, 1]) }
+    it { expect(@context.board).to eq Board.empty(2, 2, [1, 0]) }
   end
 
   context 'simple program' do
@@ -68,10 +68,10 @@ describe "valores" do
     before do
       @context = Gobgems::ExecutionContext.new
       @context.board = Board.empty(2, 2)
-      @context.run SampleProgram3
+      @context.run SampleProgram4
     end
 
-    it { expect(@context.board).to eq Board.empty(2, 2, [0, 1]) }
+    it { expect(@context.board).to eq Board.from([[{}, {}], [{red: 1}, {black: 1}]], [0, 0]) }
   end
 
 
@@ -80,8 +80,8 @@ describe "valores" do
       include Gobgems::Program
 
       def main
-        if can_move? north
-          move north
+        if can_move? south
+          move south
           push red
         end
         push black
@@ -97,6 +97,6 @@ describe "valores" do
       @context.run SampleProgram5
     end
 
-    it { expect(@context.board).to eq Board.from([[{red: 1, black: 1}, {}], [{}, {}]], [0, 0]) }
+    it { expect(@context.board).to eq Board.from([[{}, {}], [{red: 1, black: 1}, {}]], [0, 0]) }
   end
 end

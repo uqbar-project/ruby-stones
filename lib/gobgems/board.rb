@@ -59,7 +59,7 @@ module Gobgems
     end
 
     def size
-      [cells.size, cells[0].size]
+      [cells[0].size, cells.size]
     end
 
     def ==(other)
@@ -73,7 +73,7 @@ module Gobgems
     end
 
     def self.empty(x, y, position=[0, 0])
-      self.new((1..x).map { (1..y).map { empty_cell } }, position)
+      self.new((1..y).map { (1..x).map { empty_cell } }, position)
     end
 
     def self.from(cells, position=[0, 0])
@@ -86,7 +86,7 @@ module Gobgems
 
     def __cell_at__(position)
       raise OutOfBoardError unless within_bounds? position
-      cells[position[0]][position[1]]
+      cells[-(position[1]+1)][position[0]]
     end
 
     private
