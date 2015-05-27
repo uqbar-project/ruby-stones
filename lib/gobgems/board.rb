@@ -76,6 +76,15 @@ module Gobgems
       self.new(cells.map { |row| row.map { |cell| empty_cell.merge(cell) } }, position)
     end
 
+    def __set_cell__(position, cell)
+      __cell_at__(position).merge! cell
+    end
+
+    def __cell_at__(position)
+      raise OutOfBoardError unless within_bounds? position
+      cells[position[0]][position[1]]
+    end
+
     private
 
     def within_bounds?(position)
@@ -85,11 +94,7 @@ module Gobgems
     end
 
     def head_cell
-      cell_at(head_position)
-    end
-
-    def cell_at(position)
-      cells[position[0]][position[1]]
+      __cell_at__(head_position)
     end
 
     def self.empty_cell

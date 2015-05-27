@@ -20,11 +20,11 @@ head 3 3
   end
 
   context 'should set the position of the head' do
-    it { expect(board.head_position).to eq Position.new(3, 3) }
+    it { expect(board.head_position).to eq [3, 3] }
   end
 
   context 'should set the cells' do
-    it { expect(board.cell_at(Position.new 0, 0)).to eq Cell.new(red: 1, green: 2, blue: 5) }
-    it { expect(board.cell_at(Position.new 0, 1)).to eq Cell.new(black: 3) }
+    it { expect(board.__cell_at__([0, 0])).to eq(red: 1, black: 0, green: 2, blue: 5) }
+    it { expect(board.__cell_at__([0, 1])).to eq(black: 3, red: 0, green: 0, blue: 0) }
   end
 end

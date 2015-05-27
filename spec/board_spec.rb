@@ -7,8 +7,8 @@ describe Board do
 
   it { expect(Board.empty(1, 1)).to eq Board.from([[{}]]) }
   it { expect(Board.from([[{red: 1}]])).to eq Board.from([[{red: 1}]]) }
-  it { expect(Board.from([[{red: 2}]])).to eq Board.from([[{red: 1}]]) }
-  it { expect(Board.from([[{red: 2}]])).to eq Board.from([[{green: 2}]]) }
+  it { expect(Board.from([[{red: 2}]])).to eq Board.from([[{red: 2}]]) }
+  it { expect(Board.from([[{green: 2}]])).to eq Board.from([[{green: 2}]]) }
 
   it { expect(Board.empty(2, 2)).to eq Board.from([[{}, {}], [{}, {}]]) }
 

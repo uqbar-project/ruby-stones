@@ -23,7 +23,7 @@ module Gobgems
         position = get_position_from cell_line
         cell = create_cell_from cell_line
 
-        board.add_cell position, cell
+        board.__set_cell__ position, cell
       end
 
       board
@@ -36,10 +36,10 @@ module Gobgems
     end
 
     def create_cell_from(cell_line)
-      cell = Cell.new
+      cell = {}
 
       cell_line.scan(/(Azul|Negro|Rojo|Verde) (\d+)/) do |match|
-        cell.set to_color(match[0]), match[1].to_i
+        cell[to_color(match[0])] = match[1].to_i
       end
 
       cell
