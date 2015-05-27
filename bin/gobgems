@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+if ARGV.size != 3
+  puts 'Not enough arguments. Must pass program file, input board file and output board file'
+  exit 1
+end
+
+program = File.read ARGV[0]
+input_gbb = File.read ARGV[1]
+output_gbb_file = ARGV[2]
+
+require 'gobgems'
+
+Main = Class.new
+Main.class_eval do
+  include Gobgems::Program
+  eval program
+end
+
+context = Gobgems::ExecutionContext.new
+context.board = Gobgems::Gbb.read input_gbb
+context.run Main
+File.write output_gbb_file, Gobgems::Gbb.write(context.board)
