@@ -89,6 +89,13 @@ module Gobgems
       cells[-(position[1]+1)][position[0]]
     end
 
+    def __each_cell__
+      (0..(size[0]-1)).each do |x|
+        (0..(size[1]-1)).each do |y|
+          yield __cell_at__([x, y]), x, y
+        end
+      end
+    end
     private
 
     def within_bounds?(position)

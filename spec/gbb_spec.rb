@@ -30,16 +30,38 @@ head 3 3
   end
 
   describe '#write' do
-    let(:board) { Board.from([[{red:1}, {}], [{green:1}, {blue: 2, black:2}]], [1, 0]) }
+    context 'empty board' do
+      let(:board) { Board.from([[{}, {}], [{}, {}]], [0, 0]) }
 
-    it { expect(Gbb.write board).to eq(
+      it { expect(Gbb.write board).to eq(
+'GBB/1.0
+size 2 2
+head 0 0')}
+    end
+
+    context 'one stone bord' do
+      let(:board) { Board.from([[{}, {}], [{red:1}, {}]], [0, 0]) }
+
+      it { expect(Gbb.write board).to eq(
 'GBB/1.0
 size 2 2
 cell 0 0 Rojo 1
-cell 1 0 Verde 1
-cell 1 1 Negro 2
-cell 1 1 Azul 2
+head 0 0')}
+
+    end
+
+    context 'multiple stones board' do
+      let(:board) { Board.from([[{red:1}, {}], [{green:1}, {blue: 2, black:2}]], [1, 0]) }
+
+      it { expect(Gbb.write board).to eq(
+'GBB/1.0
+size 2 2
+cell 0 0 Verde 1
+cell 0 1 Rojo 1
+cell 1 0 Negro 2
+cell 1 0 Azul 2
 head 1 0')}
+    end
   end
 end
 
