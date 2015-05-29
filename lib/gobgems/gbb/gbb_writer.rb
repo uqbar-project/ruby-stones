@@ -13,12 +13,16 @@ module Gobgems
       cells_gbb = ''
 
       board.__each_cell__ do |cell, x, y|
-        cell.select { |color, count| count > 0 }.each do |color, count|
-          cells_gbb << "cell #{x} #{y} #{to_gbb_color color} #{count}\n"
-        end
+        cell = cell.select { |color, count| count > 0 }
+        next if cell.empty?
+        cells_gbb << "cell #{x} #{y} #{write_colors cell}\n"
       end
 
       cells_gbb
+    end
+
+    def self.write_colors(cell)
+      cell.map { |color, count| "#{to_gbb_color color} #{count}" }.join(' ')
     end
 
     def self.to_gbb_color(color)

@@ -58,8 +58,7 @@ head 0 0')}
 size 2 2
 cell 0 0 Verde 1
 cell 0 1 Rojo 1
-cell 1 0 Negro 2
-cell 1 0 Azul 2
+cell 1 0 Negro 2 Azul 2
 head 1 0')}
     end
   end
