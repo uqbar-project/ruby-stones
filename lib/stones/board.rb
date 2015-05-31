@@ -1,55 +1,13 @@
+require_relative './board/with_head'
+require_relative './board/with_stones'
+
 module Stones
   class OutOfBoardError < RuntimeError
   end
 
-  module WithMovementOps
-    def can_move?(direction)
-      within_bounds? next_position(direction)
-    end
-
-    def move!(direction)
-      move_to! next_position(direction)
-    end
-
-    def move_to_edge!(direction)
-      move!(direction) while can_move?(direction)
-    end
-
-    private
-
-    def move_to!(position)
-      raise OutOfBoardError unless within_bounds? position
-      @head_position = position
-    end
-
-    def next_position(direction)
-      direction.call(*@head_position)
-    end
-
-  end
-
-  module WithColorOps
-    def push!(color, amount=1)
-      head_cell[color] += amount
-    end
-
-    def pop!(color)
-      raise "#{color} Underflow" if head_cell[color] == 0
-      head_cell[color] -= 1
-    end
-
-    def count(color)
-      head_cell[color]
-    end
-
-    def exist?(color)
-      count(color) > 0
-    end
-  end
-
   class Board
-    include WithMovementOps
-    include WithColorOps
+    include WithHead
+    include WithStones
 
     attr_reader :cells, :head_position
 
@@ -114,4 +72,3 @@ module Stones
     end
   end
 end
-
