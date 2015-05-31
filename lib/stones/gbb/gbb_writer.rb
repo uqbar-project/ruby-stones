@@ -12,7 +12,7 @@ module Stones
     def self.write_cells(board)
       cells_gbb = ''
 
-      board.__each_cell__ do |cell, x, y|
+      board.send :each_cell do |cell, x, y|
         cell = cell.select { |color, count| count > 0 }
         next if cell.empty?
         cells_gbb << "cell #{x} #{y} #{write_colors cell}\n"
