@@ -31,7 +31,7 @@ module Stones
     end
 
     def self.empty(x, y, position=[0, 0])
-      self.new((1..y).map { (1..x).map { empty_cell } }, position)
+      self.new(empty_cells(x, y), position)
     end
 
     def self.from(cells, position=[0, 0])
@@ -69,6 +69,10 @@ module Stones
 
     def self.empty_cell
       {red: 0, black: 0, green: 0, blue: 0}
+    end
+
+    def self.empty_cells(x, y)
+      (1..y).map { (1..x).map { empty_cell } }
     end
   end
 end

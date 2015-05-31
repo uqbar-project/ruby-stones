@@ -9,6 +9,10 @@ module Stones
       head_cell[color] -= 1
     end
 
+    def clear!
+      @cells = self.class.empty_cells(*size)
+    end
+
     def count(color)
       head_cell[color]
     end
