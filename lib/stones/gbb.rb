@@ -1,7 +1,7 @@
 require_relative './gbb/gbb_reader'
 require_relative './gbb/gbb_writer'
 
-module Gobgems
+module Stones
   module Gbb
     def self.read(gbb)
       GbbReader.new.from_string(gbb)

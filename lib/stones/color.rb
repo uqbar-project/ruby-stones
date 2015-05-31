@@ -1,4 +1,4 @@
-module Gobgems
+module Stones
   module Color
     def red
       :red

@@ -1,4 +1,4 @@
-module Gobgems
+module Stones
   class ExecutionContext
     attr_accessor :board
 

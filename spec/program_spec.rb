@@ -1,15 +1,15 @@
 require_relative './spec_helper'
 
-describe Gobgems::Program do
+describe Stones::Program do
   context 'empty program' do
     class SampleProgram1
-      include Gobgems::Program
+      include Stones::Program
 
       def main
       end
     end
     before do
-      @context = Gobgems::ExecutionContext.new
+      @context = Stones::ExecutionContext.new
       @context.board = Board.empty(2, 2)
       @context.run SampleProgram1
     end
@@ -19,7 +19,7 @@ describe Gobgems::Program do
 
   context 'idempotent program' do
     class SampleProgram2
-      include Gobgems::Program
+      include Stones::Program
 
       def main
         push red
@@ -39,14 +39,14 @@ describe Gobgems::Program do
 
   context 'movement program' do
     class SampleProgram3
-      include Gobgems::Program
+      include Stones::Program
 
       def main
         move east
       end
     end
     before do
-      @context = Gobgems::ExecutionContext.new
+      @context = Stones::ExecutionContext.new
       @context.board = Board.empty(2, 2)
       @context.run SampleProgram3
     end
@@ -56,7 +56,7 @@ describe Gobgems::Program do
 
   context 'simple program' do
     class SampleProgram4
-      include Gobgems::Program
+      include Stones::Program
 
       def main
         push red
@@ -66,7 +66,7 @@ describe Gobgems::Program do
       end
     end
     before do
-      @context = Gobgems::ExecutionContext.new
+      @context = Stones::ExecutionContext.new
       @context.board = Board.empty(2, 2)
       @context.run SampleProgram4
     end
@@ -77,7 +77,7 @@ describe Gobgems::Program do
 
   context 'program with if' do
     class SampleProgram5
-      include Gobgems::Program
+      include Stones::Program
 
       def main
         if can_move? south
@@ -92,7 +92,7 @@ describe Gobgems::Program do
     end
 
     before do
-      @context = Gobgems::ExecutionContext.new
+      @context = Stones::ExecutionContext.new
       @context.board = Board.empty(2, 2)
       @context.run SampleProgram5
     end
