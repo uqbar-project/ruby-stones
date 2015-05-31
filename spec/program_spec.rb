@@ -22,8 +22,8 @@ describe Stones::Program do
       include Stones::Program
 
       def main
-        push red
-        pop red
+        push! red
+        pop! red
       end
 
     end
@@ -42,7 +42,7 @@ describe Stones::Program do
       include Stones::Program
 
       def main
-        move east
+        move! east
       end
     end
     before do
@@ -59,10 +59,10 @@ describe Stones::Program do
       include Stones::Program
 
       def main
-        push red
-        move east
-        push black
-        move west
+        push! red
+        move! east
+        push! black
+        move! west
       end
     end
     before do
@@ -81,12 +81,12 @@ describe Stones::Program do
 
       def main
         if can_move? south
-          move south
-          push red
+          move! south
+          push! red
         end
-        push black
+        push! black
         if count(black) >= 1
-          push red
+          push! red
         end
       end
     end

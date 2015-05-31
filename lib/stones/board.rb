@@ -7,12 +7,12 @@ module Stones
       within_bounds? next_position(direction)
     end
 
-    def move(direction)
+    def move!(direction)
       __move_to__ next_position(direction)
     end
 
-    def move_to_edge(direction)
-      move(direction) while can_move?(direction)
+    def move_to_edge!(direction)
+      move!(direction) while can_move?(direction)
     end
 
     def __move_to__(position)
@@ -29,11 +29,11 @@ module Stones
   end
 
   module WithColorOps
-    def push(color, amount=1)
+    def push!(color, amount=1)
       head_cell[color] += amount
     end
 
-    def pop(color)
+    def pop!(color)
       raise "#{color} Underflow" if head_cell[color] == 0
       head_cell[color] -= 1
     end
