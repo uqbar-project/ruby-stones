@@ -1,4 +1,4 @@
-module Gobgems
+module Stones
   module GbbWriter
     def self.write(board)
       "GBB/1.0\n" +

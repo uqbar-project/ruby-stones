@@ -1,4 +1,4 @@
-module Gobgems
+module Stones
   class OutOfBoardError < RuntimeError
   end
 

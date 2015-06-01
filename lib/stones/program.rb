@@ -1,9 +1,9 @@
-module Gobgems
+module Stones
   module Program
     attr_accessor :board
 
-    include Gobgems::Color
-    include Gobgems::Direction
+    include Stones::Color
+    include Stones::Direction
 
     def move(direction)
       board.move(direction)

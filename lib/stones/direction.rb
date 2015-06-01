@@ -1,4 +1,4 @@
-module Gobgems
+module Stones
   module Direction
     def east
       @east ||= -> (x, y) { [x+1, y] }

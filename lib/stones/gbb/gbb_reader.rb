@@ -7,7 +7,7 @@ class MatchData
   end
 end
 
-module Gobgems
+module Stones
   class GbbReader
     COLORS = {'Azul' => :blue, 'Negro' => :black, 'Rojo' => :red, 'Verde' => :green}
 
