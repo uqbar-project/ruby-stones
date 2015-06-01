@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-stones (0.0.5)
+    ruby-stones (0.1.0)
 
 GEM
   remote: https://rubygems.org/
