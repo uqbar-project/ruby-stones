@@ -17,47 +17,47 @@ describe Board do
 
     context 'idempotent put ops' do
       before do
-        board.push Color.red
-        board.pop Color.red
+        board.push! Color.red
+        board.pop! Color.red
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]]) }
     end
 
     context 'single push op' do
       before do
-        board.push Color.red
+        board.push! Color.red
       end
       it { expect(board).to eq Board.from([[{}, {}], [{red: 1}, {}]]) }
     end
 
     context 'invalid pop op' do
-      it { expect { board.pop Color.red }.to raise_exception }
+      it { expect { board.pop! Color.red }.to raise_exception }
     end
 
     context 'multiple push ops' do
       before do
-        board.push Color.red
-        board.push Color.red
-        board.push Color.blue
+        board.push! Color.red
+        board.push! Color.red
+        board.push! Color.blue
       end
       it { expect(board).to eq Board.from([[{}, {}], [{red: 2, blue: 1}, {}]]) }
     end
 
     context 'multiple push ops with movement' do
       before do
-        board.move Direction.north
-        board.push Color.green
-        board.push Color.black
-        board.move Direction.south
+        board.move! Direction.north
+        board.push! Color.green
+        board.push! Color.black
+        board.move! Direction.south
       end
       it { expect(board).to eq Board.from([[{green: 1, black: 1}, {}], [{}, {}]]) }
     end
 
     context 'push with color query' do
       before do
-        board.push Color.green
-        board.push Color.green
-        board.push Color.red
+        board.push! Color.green
+        board.push! Color.green
+        board.push! Color.red
       end
       it { expect(board.count(Color.green)).to eq 2 }
       it { expect(board.count(Color.red)).to eq 1 }
@@ -78,38 +78,38 @@ describe Board do
 
     context 'idempotent move_to_edge horizontal idempotent ops' do
       before do
-        board.move_to_edge Direction.east
-        board.move_to_edge Direction.west
+        board.move_to_edge! Direction.east
+        board.move_to_edge! Direction.west
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [0, 0]) }
     end
 
     context 'idempotent move_to_edge vertical idempotent ops' do
       before do
-        board.move_to_edge Direction.north
-        board.move_to_edge Direction.south
+        board.move_to_edge! Direction.north
+        board.move_to_edge! Direction.south
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [0, 0]) }
     end
 
     context 'idempotent move_to_edge mixed ops' do
       before do
-        board.move_to_edge Direction.east
+        board.move_to_edge! Direction.east
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [1, 0]) }
     end
 
     context 'idempotent move_to_edge vertical ops' do
       before do
-        board.move_to_edge Direction.north
+        board.move_to_edge! Direction.north
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [0, 1]) }
     end
 
     context 'idempotent move horizontal ops' do
       before do
-        board.move Direction.east
-        board.move Direction.west
+        board.move! Direction.east
+        board.move! Direction.west
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]]) }
     end
@@ -117,37 +117,37 @@ describe Board do
 
     context 'idempotent move vertical ops' do
       before do
-        board.move Direction.north
-        board.move Direction.south
+        board.move! Direction.north
+        board.move! Direction.south
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]]) }
     end
 
     context 'move within board' do
       before do
-        board.move Direction.east
+        board.move! Direction.east
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [1, 0]) }
     end
 
     context 'move within board multiple times' do
       before do
-        board.move Direction.north
-        board.move Direction.east
+        board.move! Direction.north
+        board.move! Direction.east
       end
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [1, 1]) }
     end
 
     context 'move without external bounds' do
       before do
-        board.move Direction.north
+        board.move! Direction.north
       end
-      it { expect { board.move Direction.north }.to raise_exception }
+      it { expect { board.move! Direction.north }.to raise_exception }
     end
 
     context 'move out of board' do
-      it { expect { board.move Direction.west }.to raise_exception }
-      it { expect { board.move Direction.south }.to raise_exception }
+      it { expect { board.move! Direction.west }.to raise_exception }
+      it { expect { board.move! Direction.south }.to raise_exception }
     end
   end
 

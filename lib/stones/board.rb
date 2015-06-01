@@ -7,20 +7,20 @@ module Stones
       within_bounds? next_position(direction)
     end
 
-    def move(direction)
-      __move_to__ next_position(direction)
+    def move!(direction)
+      move_to! next_position(direction)
     end
 
-    def move_to_edge(direction)
-      move(direction) while can_move?(direction)
-    end
-
-    def __move_to__(position)
-      raise OutOfBoardError unless within_bounds? position
-      @head_position = position
+    def move_to_edge!(direction)
+      move!(direction) while can_move?(direction)
     end
 
     private
+
+    def move_to!(position)
+      raise OutOfBoardError unless within_bounds? position
+      @head_position = position
+    end
 
     def next_position(direction)
       direction.call(*@head_position)
@@ -29,11 +29,11 @@ module Stones
   end
 
   module WithColorOps
-    def push(color, amount=1)
+    def push!(color, amount=1)
       head_cell[color] += amount
     end
 
-    def pop(color)
+    def pop!(color)
       raise "#{color} Underflow" if head_cell[color] == 0
       head_cell[color] -= 1
     end
@@ -80,23 +80,24 @@ module Stones
       self.new(cells.map { |row| row.map { |cell| empty_cell.merge(cell) } }, position)
     end
 
-    def __set_cell__(position, cell)
-      __cell_at__(position).merge! cell
+    private
+
+    def each_cell
+      (0..(size[0]-1)).each do |x|
+        (0..(size[1]-1)).each do |y|
+          yield cell_at([x, y]), x, y
+        end
+      end
     end
 
-    def __cell_at__(position)
+    def cell_at(position)
       raise OutOfBoardError unless within_bounds? position
       cells[-(position[1]+1)][position[0]]
     end
 
-    def __each_cell__
-      (0..(size[0]-1)).each do |x|
-        (0..(size[1]-1)).each do |y|
-          yield __cell_at__([x, y]), x, y
-        end
-      end
+    def set_cell(position, cell)
+      cell_at(position).merge! cell
     end
-    private
 
     def within_bounds?(position)
       (x, y) = size
@@ -105,7 +106,7 @@ module Stones
     end
 
     def head_cell
-      __cell_at__(head_position)
+      cell_at(head_position)
     end
 
     def self.empty_cell

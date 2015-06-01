@@ -24,8 +24,8 @@ head 3 3
     end
 
     context 'should set the cells' do
-      it { expect(board.__cell_at__([0, 0])).to eq(red: 1, black: 0, green: 2, blue: 5) }
-      it { expect(board.__cell_at__([0, 1])).to eq(black: 3, red: 0, green: 0, blue: 0) }
+      it { expect(board.send :cell_at,[0, 0]).to eq(red: 1, black: 0, green: 2, blue: 5) }
+      it { expect(board.send :cell_at, [0, 1]).to eq(black: 3, red: 0, green: 0, blue: 0) }
     end
   end
 

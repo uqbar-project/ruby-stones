@@ -5,16 +5,16 @@ module Stones
     include Stones::Color
     include Stones::Direction
 
-    def move(direction)
-      board.move(direction)
+    def move!(direction)
+      board.move!(direction)
     end
 
-    def push(color)
-      board.push(color)
+    def push!(color)
+      board.push!(color)
     end
 
-    def pop(color)
-      board.pop(color)
+    def pop!(color)
+      board.pop!(color)
     end
 
     def exist?(color)
