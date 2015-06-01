@@ -16,10 +16,10 @@ module Stones
       @south ||= -> (x, y) { [x, y-1] }
     end
 
-    def all
+    def self.all
       [east, west, south, north]
     end
 
-    module_function :north, :south, :east, :west, :all
+    module_function :north, :south, :east, :west
   end
 end
