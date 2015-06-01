@@ -74,7 +74,6 @@ describe Stones::Program do
     it { expect(@context.board).to eq Board.from([[{}, {}], [{red: 1}, {black: 1}]], [0, 0]) }
   end
 
-
   context 'program with if' do
     class SampleProgram5
       include Stones::Program
@@ -98,5 +97,26 @@ describe Stones::Program do
     end
 
     it { expect(@context.board).to eq Board.from([[{}, {}], [{red: 1, black: 1}, {}]], [0, 0]) }
+  end
+
+  context 'program with iteration' do
+    class SampleProgram6
+      include Stones::Program
+
+      def main
+        clear!
+        colors.each do |color|
+          3.times { push! color }
+        end
+      end
+    end
+
+    before do
+      @context = Stones::ExecutionContext.new
+      @context.board = Board.empty(2, 2)
+      @context.run SampleProgram6
+    end
+
+    it { expect(@context.board).to eq Board.from([[{}, {}], [{red: 3, green: 3, black: 3, blue: 3}, {}]], [0, 0]) }
   end
 end

@@ -130,6 +130,23 @@ describe Board do
       it { expect(board).to eq Board.from([[{}, {}], [{}, {}]], [1, 0]) }
     end
 
+    context 'when clear empty board' do
+      before do
+        board.clear!
+      end
+      it { expect(board).to eq Board.empty(2, 2) }
+    end
+
+    context 'when clear non empty board' do
+      before do
+        board.push! Color.red
+        board.move! Direction.east
+        board.clear!
+      end
+      it { expect(board).to eq Board.empty(2, 2, [1, 0]) }
+    end
+
+
     context 'move within board multiple times' do
       before do
         board.move! Direction.north

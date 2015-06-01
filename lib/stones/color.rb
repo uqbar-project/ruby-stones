@@ -16,10 +16,10 @@ module Stones
       :black
     end
 
-    def all
+    def self.all
       [red, green, black, blue]
     end
 
-    module_function :red, :blue, :green, :black, :all
+    module_function :red, :blue, :green, :black
   end
 end
