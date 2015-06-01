@@ -119,4 +119,23 @@ describe Stones::Program do
 
     it { expect(@context.board).to eq Board.from([[{}, {}], [{red: 3, green: 3, black: 3, blue: 3}, {}]], [0, 0]) }
   end
+
+  context 'program with movement to edge' do
+    class SampleProgram7
+      include Stones::Program
+
+      def main
+        move_to_edge! north
+        move_to_edge! east
+      end
+    end
+
+    before do
+      @context = Stones::ExecutionContext.new
+      @context.board = Board.empty(3, 3)
+      @context.run SampleProgram7
+    end
+
+    it { expect(@context.board).to eq Board.empty(3, 3, [2, 2]) }
+  end
 end

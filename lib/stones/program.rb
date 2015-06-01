@@ -10,7 +10,7 @@ module Stones
     end
 
     def move_to_edge!(direction)
-      board.move_to_edge!
+      board.move_to_edge!(direction)
     end
 
     def can_move?(direction)
