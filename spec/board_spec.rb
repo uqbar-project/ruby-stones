@@ -2,15 +2,24 @@ require_relative './spec_helper'
 
 describe Board do
 
-  it { expect(Board.empty(1, 1)).to eq Board.empty(1, 1) }
-  it { expect(Board.empty(1, 1)).to_not eq Board.empty(2, 2) }
+  describe 'equality' do
+    it { expect(Board.empty(1, 1)).to eq Board.empty(1, 1) }
+    it { expect(Board.empty(1, 1)).to_not eq Board.empty(2, 2) }
 
-  it { expect(Board.empty(1, 1)).to eq Board.from([[{}]]) }
-  it { expect(Board.from([[{red: 1}]])).to eq Board.from([[{red: 1}]]) }
-  it { expect(Board.from([[{red: 2}]])).to eq Board.from([[{red: 2}]]) }
-  it { expect(Board.from([[{green: 2}]])).to eq Board.from([[{green: 2}]]) }
+    it { expect(Board.empty(1, 1)).to eq Board.from([[{}]]) }
+    it { expect(Board.from([[{red: 1}]])).to eq Board.from([[{red: 1}]]) }
+    it { expect(Board.from([[{red: 2}]])).to eq Board.from([[{red: 2}]]) }
+    it { expect(Board.from([[{green: 2}]])).to eq Board.from([[{green: 2}]]) }
 
-  it { expect(Board.empty(2, 2)).to eq Board.from([[{}, {}], [{}, {}]]) }
+    it { expect(Board.empty(2, 2)).to eq Board.from([[{}, {}], [{}, {}]]) }
+
+    context 'checks the head position' do
+      let(:board1) { Board.empty(2, 2) }
+      let(:board2) { Board.empty(2, 2, [0, 1]) }
+
+      it { expect(board1).to_not eq board2 }
+    end
+  end
 
   describe 'ops' do
     let(:board) { Board.empty(2, 2) }
