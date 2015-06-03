@@ -23,11 +23,15 @@ module Stones
     def ==(other)
       self.class == other.class &&
           cells_equal?(other) &&
-          self.head_position == other.head_position
+          head_position_equal?(other)
     end
 
     def hash
       self.cells.hash ^ self.head_position.hash
+    end
+
+    def head_position_equal?(other)
+      self.head_position == other.head_position
     end
 
     def cells_equal?(other)

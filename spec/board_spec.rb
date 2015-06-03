@@ -1,13 +1,22 @@
 require_relative './spec_helper'
 
 describe Board do
-  describe '#cells_equal?' do
+  context '#cells_equal?' do
     context 'doesnt check the head position' do
       let(:board1) { Board.empty(2, 2) }
       let(:board2) { Board.empty(2, 2, [0, 1]) }
 
       it { expect(board1.cells_equal? board2).to be_true }
     end
+  end
+
+  context '#head_position_equal?' do
+    let(:board1) { Board.empty(2, 2) }
+    let(:board2) { Board.empty(2, 2, [0, 1]) }
+    let(:board3) { Board.empty(3, 2, [0, 1]) }
+
+    it { expect(board1.head_position_equal? board2).to be_false }
+    it { expect(board2.head_position_equal? board3).to be_true }
   end
 
   describe 'equality' do
