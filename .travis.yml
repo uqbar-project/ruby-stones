@@ -4,3 +4,11 @@ rvm:
 addons:
   code_climate:
     repo_token: cc36abb69a3081cfb6a664fb2bdbeecd2baeaf8a8b963369130ccf2bb73a7b27
+deploy:
+  provider: rubygems
+  api_key:
+    secure: ht4RiOBK6t9zq/nyuupgJH4LtDMYIuMXbQzF+9g/atabBWhi8F4ous7hsU3UghxE/aUD4j9lmaJQ/SkHDpZitA+TYQaUSufLnSnkfAw0hy7pdxAxCXhrD4aPNZXWRQXpTwQ4YJoQFSOWiH8tfuYwDdBo2ziG70BWo+mEuAkXsPy1cBAsTkL9D+FSgbTAylcKCPzlObaOEQGk/SzoCpCgW4hnRbGGoS1FVJIqzd7wevWrNT4zbcGT1AgB9+Am36DZQnOs8JySPsmW2G1BG35IzdCAMGp5dk9ZVtTJ7b1E4bXhFsmwURovny+r3kfKMHMuLo6VDm2dMGdpy3g4MkxVmipWDmhOVojAuiC6NgrSliNsiRx52tVbZlOMJiykyFPlUxjKebWN6aaFhJBUx82D27nc69m+M1no4jmQ+aRo9WC5m2JmIgNHh3EuMu46FYPLoxKn3q1IjnVg2xM9tnYZTE65yU3EP8REW9Hu+mFfP7qUo+CGKgglRyQpj+sPYyLVi3olxWIf+QhhYvOHA0QT30xrNsffrRGU4ZQFBVSR9YbZBZwweNWpwMEtnyjVQWWexTGeVsnrgwGhCE7EKernaz6XxdrrJFF33eAftTg/aoaHUKr1j0L2zT1EJQjVgqWnqtB1YsbY07LdcUvutOezznwFFV2SID3YTI9IsVPbMPI=
+  gem: ruby-stones
+  on:
+    tags: true
+    repo: uqbar-project/ruby-stones
