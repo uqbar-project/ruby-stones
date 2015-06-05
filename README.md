@@ -5,3 +5,6 @@
 
 # ruby-stones
 > Ruby implementation of a Gobstones-compatible board model
+
+
+![Ruby Stones](http://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Ruby-raw_stones-Tanzania.jpg/640px-Ruby-raw_stones-Tanzania.jpg)
