@@ -46,8 +46,6 @@ module Stones
       self.new(cells.map { |row| row.map { |cell| empty_cell.merge(cell) } }, position)
     end
 
-    private
-
     def each_cell
       (0..(size[0]-1)).each do |x|
         (0..(size[1]-1)).each do |y|
@@ -61,6 +59,12 @@ module Stones
       cells[-(position[1]+1)][position[0]]
     end
 
+    def head_cell
+      cell_at(head_position)
+    end
+
+    private
+
     def set_cell(position, cell)
       cell_at(position).merge! cell
     end
@@ -69,10 +73,6 @@ module Stones
       (x, y) = size
       position[0] >= 0 && position[1] >= 0 &&
           position[0] < x && position[1] < y
-    end
-
-    def head_cell
-      cell_at(head_position)
     end
 
     def self.empty_cell
