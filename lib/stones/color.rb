@@ -20,6 +20,10 @@ module Stones
       [red, green, black, blue]
     end
 
+    def self.all_with_names
+      {'Azul' => :blue, 'Negro' => :black, 'Rojo' => :red, 'Verde' => :green}
+    end
+
     module_function :red, :blue, :green, :black
   end
 end

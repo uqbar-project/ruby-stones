@@ -9,8 +9,6 @@ end
 
 module Stones
   class GbbReader
-    COLORS = {'Azul' => :blue, 'Negro' => :black, 'Rojo' => :red, 'Verde' => :green}
-
     def from_string(gbb_string)
       board = nil
 
@@ -46,7 +44,7 @@ module Stones
     end
 
     def to_color(gbb_color_string)
-      COLORS[gbb_color_string]
+      Color.all_with_names[gbb_color_string]
     end
   end
 end
